@@ -1,0 +1,26 @@
+Django>=3.2,<3.3
+python-decouple
+django-taggit
+Pillow
+djangorestframework
+markdown       
+django-filter  
+coreapi 
+drf-yasg[validation]
+djangorestframework-simplejwt
+django-mail-templated
+djoser
+black
+flake8-django
+flake8
+dj-rest-auth
+pytest
+pytest-django
+Faker
+# background proccess and cache
+celery
+redis
+django-redis
+django-celery-beat
+# deployment
+gunicorn
