@@ -10,7 +10,7 @@ User = get_user_model()
 
 class Post(models.Model):
     image = models.ImageField(upload_to='blog/',default="blog/default.jpg" )
-    author = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    author = models.ForeignKey('accounts.Profile',on_delete=models.CASCADE,null=True)
     title = models.CharField(max_length=255)
     content = models.TextField()
     tags =TaggableManager() 

@@ -2,9 +2,11 @@ Django>=3.2,<3.3
 python-decouple
 django-taggit
 Pillow
+
 djangorestframework
 markdown       
 django-filter  
+
 coreapi 
 drf-yasg[validation]
 djangorestframework-simplejwt
