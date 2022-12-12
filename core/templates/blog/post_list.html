@@ -1,48 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends "base.html" %}
 
-<body>
-    <h1>blog posts</h1>
-    <ol>
-        {% for post in posts %}
-        <li>
-            <a href="{% url 'blog:post-detail' pk=post.id %}" ><h2>{{post.id}} - {{post.title}}</h2></a>
-            <a href="{% url 'blog:post-edit' pk=post.id %}">
-                <h5>Edit</h5>
-            </a>
-            <a href="{% url 'blog:post-delete' pk=post.id %}">
-                <h5>Delete</h5>
-            </a>
-            <small>{{post.author.first_name}} {{post.author.last_name}}  - {{post.published_date}}</small>
-        </li>
-        {% endfor %}
-    </ol>
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
+{% block content %}
 
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+<style>
+    .div1 {
+        background-color: #EBEBEB;
+        }
+
+    .card {
+        background-color: #ba9ed9;
+        }
+</style>
+<div class="col-sm-14 col-sm-offset-3">
+    <h1></h1>
+    <form action="" method="GET">
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Search <i class="fa fa-search"></i></button>
             </span>
+            
+        </div>
+        
+    </form>
+    <br>
+<div class="div1" id="post-wrapper" >
+       
+ 
 
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+    <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $.get('/blog/api/v1/post/',  // url
+            function (data, textStatus, jqXHR) { 
+                wrapper = $('#post-wrapper');
+                for (post of data.results){
+                   
+                    wrapper.append(`<div class="row form-group"> 
+                        <div class="col-sm-12">
+                            <div class="card">
+                                {% if post.image %}
+                                <img src="{ post.image.url }" class="card-img-top" alt="Unknown">
+                                {% endif %}
+                                <div class="card-body post-detail-item">
+                                    <h5 class="card-title">
+                                        <p> title:<a href=" ${ post.absolute_url }">${post.title}</a></p>
+                                    </h5>
+                                    <p>publised date:${ post.published_date }</p>
+                                    
+                                    <p>Author: ${ post.author_name}</p>
+                                    <p>Content: ${ post.content_abs }</p>
+                                    
+                                    <a href="{% url 'blog:post-list' %}${ post.id }" class="btn btn-primary">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                                 `)
+                
+                    //wrapper.append(`<h2>${post.category.name}</h2>`)
+                }
+               
+                //alert('status: ' + textStatus + ', data:' + data); 
+                console.log(data);
 
+            });
+    </script>      
+    
+    
 
-</body>
-
-</html>
+{% endblock content %}

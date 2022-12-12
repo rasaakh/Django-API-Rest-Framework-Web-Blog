@@ -17,15 +17,19 @@ class PostSerializer(serializers.ModelSerializer):
     snippet = serializers.ReadOnlyField(source="get_snippet")
     relative_url = serializers.URLField(source="get_absolute_api_url", read_only=True)
     absolute_url = serializers.SerializerMethodField(method_name="get_abs_url")
-
+    author_name = serializers.SerializerMethodField(method_name="get_author")
+    content_abs = serializers.SerializerMethodField(method_name="get_content_abs")
     class Meta:
         model = Post
+       
         fields = [
             "id",
             "author",
+            "author_name",
             "image",
             "title",
             "content",
+            "content_abs",
             "snippet",
             "category",
             "status",
@@ -33,6 +37,8 @@ class PostSerializer(serializers.ModelSerializer):
             "absolute_url",
             "created_date",
             "published_date",
+            
+           
         ]
         read_only_fields = ["author"]
 
@@ -40,6 +46,17 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         return request.build_absolute_uri(obj.pk)
 
+    
+    def get_author(self, obj):
+        profile = Profile.objects.get(pk=obj.author.id)
+        
+        return profile.first_name + ' ' + profile.last_name
+    
+    def get_content_abs(self, obj):
+                
+        return obj.content[0:100]+'...'
+    
+    
     def to_representation(self, instance):
         request = self.context.get("request")
         rep = super().to_representation(instance)
@@ -47,6 +64,7 @@ class PostSerializer(serializers.ModelSerializer):
             rep.pop("snippet", None)
             rep.pop("relative_url", None)
             rep.pop("absolute_url", None)
+            
         else:
             rep.pop("content", None)
         rep["category"] = CategorySerializer(

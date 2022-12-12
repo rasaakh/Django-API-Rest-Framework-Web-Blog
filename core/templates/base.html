@@ -68,73 +68,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<!-- Marked library CDN script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js"></script>
 
-<!-- jQuery functions -->
-<script>
-$(document).ready(function(){
-    $(".comment-reply-btn").click(function(event) {
-        event.preventDefault();
-        $(this).parent().next(".comment-reply").fadeToggle( "slow", "linear" );
-    })
-    $(".content-markdown").each(function(){
-        var content = $(this).text()
-        var markedContent = marked(content)
-        $(this).html(markedContent)
-    })
-    $(".post-detail-item img").each(function(){
-        $(this).addClass("img-fluid");
-    })
 
-    var titleInput = $("#id_title");
-    function setTitle(title){
-        $("#preview-title").text(title.val())
-    }
-    setTitle(titleInput)
-    titleInput.keyup(function(){
-        var new_title = $(this)
-        setTitle(new_title)
-    })
 
-    var contentInput = $("#wmd-input-id_content");
-    function setContent(value){
-        var markedContent = marked(value)
-        $("#preview-content").html(markedContent)
-        $("#preview-content img").each(function(){
-            $(this).addClass("img-fluid")
-        })
-    }
-    setContent(contentInput.val())
-    contentInput.keyup(function(){
-        new_content = $(this).val()
-        setContent(new_content)
-    })
-})
-</script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <div class="col-sm-14 "> 
-            <div class="card">
-                <div class="card-body post-detail-item">
-                       <h1>{{post.title}}</h1>
-                       <hr>
-                       <small>{{object.author.last_name}} - {{object.published_date}} </small>
-                       <p>{{object.content}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

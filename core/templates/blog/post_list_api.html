@@ -26,10 +26,11 @@
                 wrapper = $('#post-wrapper');
                 for (post of data.results){
                     wrapper.append(`<li><a href="${post.absolute_url}"><h2>${post.title}</h2></a></li>`)
+                    wrapper.append(`<h2>${post.category.name}</h2>`)
                 }
-                
-                // alert('status: ' + textStatus + ', data:' + data);
-                // console.log(data);
+                console.log(data);
+                //alert('status: ' + textStatus + ', data:' + data); 
+                //console.log(data);
 
             });
     </script>
