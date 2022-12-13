@@ -10,6 +10,7 @@ from django.views.generic import (
 )
 from django.http import HttpResponse
 from .models import Post
+from accounts.models import Profile
 from django.shortcuts import get_object_or_404
 from .forms import PostForm
 from django.contrib.auth.mixins import (
@@ -35,7 +36,7 @@ class IndexView(TemplateView):
 
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin,ListView):
     permission_required = "blog.view_post"
     queryset = Post.objects.all()
     # model = Post
@@ -60,7 +61,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     success_url = "/blog/post/"
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        profile = Profile.objects.get(user_id=self.request.user.id)
+        form.instance.author = profile
         return super().form_valid(form)
 
 
