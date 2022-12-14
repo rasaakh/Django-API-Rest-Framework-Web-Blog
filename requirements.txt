@@ -8,7 +8,7 @@ markdown
 django-filter  
 
 coreapi 
-drf-yasg[validation]
+
 djangorestframework-simplejwt
 django-mail-templated
 djoser
@@ -26,3 +26,4 @@ django-redis
 django-celery-beat
 # deployment
 gunicorn
+drf-yasg[validation]
