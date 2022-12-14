@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
-from .views import blog_single
+from .views import blog_single,blog_search
 app_name = "blog"
 
 urlpatterns = [
@@ -20,4 +20,5 @@ urlpatterns = [
     ),
     path("api/v1/", include("blog.api.v1.urls")),
     path("post/api/", views.PostListApiView.as_view(), name="post-list-api"),
+    path('search/',blog_search, name='search'),
 ]

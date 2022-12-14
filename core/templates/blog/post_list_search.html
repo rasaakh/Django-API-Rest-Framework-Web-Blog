@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .div1 {
+        background-color: #EBEBEB;
+        }
+
+    .card {
+        background-color: #B0C4DE;
+        }
+</style>
+<div class="col-sm-14 col-sm-offset-3">
+    <h1></h1>
+  
+
+    <div class="col-sm-14 col-sm-offset-3">
+        <h1></h1>
+        <form class="search-form" action="{% url 'blog:search' %}" method="get">
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" name="s" placeholder="Search posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Search <i class="fa fa-search"></i></button>
+                </span>
+                
+            </div>
+            
+        </form>
+    
+    </div>
+    <br>
+   
+    <div class="row form-group"> 
+
+        {% for post in posts %}
+        <div class="col-sm-12">
+
+            <div class="card">
+                
+                <div class="card-body post-detail-item">
+                    <h5 class="card-title">
+                        <p> title:<a href=" {{ post.absolute_url }}">{{post.title}}</a></p>
+                    </h5>
+                    <p>publised date:{{ post.published_date }}</p>
+                    
+                    <p>Author: {{ post.author.first_name}}</p>
+                    <p>Content: {{ post.content|truncatewords:20 }}</p>
+                    <a href="{% url 'blog:post-list' %}{{post.id}}" class="btn btn-primary">View Detail</a>
+                    <a href="{% url 'blog:post-list' %}" class="btn btn-primary">Go To Post List</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      
+ 
+
+    <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+      
+
+{% endblock content %}

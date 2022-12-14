@@ -14,9 +14,9 @@
 </style>
 <div class="col-sm-14 col-sm-offset-3">
     <h1></h1>
-    <form action="" method="GET">
+    <form class="search-form" action="{% url 'blog:search' %}" method="get">
         <div class="input-group mb-3">
-            <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}">
+            <input class="form-control" type="text" name="s" placeholder="Search posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">Search <i class="fa fa-search"></i></button>
             </span>
@@ -24,6 +24,10 @@
         </div>
         
     </form>
+
+</div>
+
+
     <br>
 <div class="div1" id="post-wrapper" >
        
@@ -60,9 +64,7 @@
                     wrapper.append(`<div class="row form-group"> 
                         <div class="col-sm-12">
                             <div class="card">
-                                {% if post.image %}
-                                <img src="${ post.image.url }" class="card-img-top" alt="Unknown">
-                                {% endif %}
+                                
                                 <div class="card-body post-detail-item">
                                     <h5 class="card-title">
                                         <p> title:<a href=" ${ post.absolute_url }">${post.title}</a></p>
