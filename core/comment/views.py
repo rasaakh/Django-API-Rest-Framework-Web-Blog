@@ -1,29 +1,19 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic import (
     ListView,
     DetailView,
-    FormView,
     CreateView,
     UpdateView,
     DeleteView,
 )
-from django.http import HttpResponse
 from comment.models import Comment
-from django.shortcuts import get_object_or_404
 from .forms import CommentForm
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin,
-    PermissionRequiredMixin,
-)
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CommentsListView(ListView):
     permission_required = "blog.view_post"
     queryset = Comment.objects.all()
-  
+
     context_object_name = "comment"
     # paginate_by = 1
     ordering = "-id"
@@ -36,10 +26,9 @@ class CommentDetailView(LoginRequiredMixin, DetailView):
     model = Comment
 
 
-
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
-   
+
     form_class = CommentForm
     success_url = "/comment/"
 
@@ -57,4 +46,3 @@ class CommentEditView(LoginRequiredMixin, UpdateView):
 class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
     success_url = "/comment/"
-

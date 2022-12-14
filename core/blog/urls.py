@@ -1,14 +1,11 @@
 from django.urls import path, include
 from . import views
-from django.views.generic import TemplateView
-from django.views.generic.base import RedirectView
-from .views import blog_single,blog_search
+from .views import blog_single, blog_search
+
 app_name = "blog"
 
 urlpatterns = [
-   
     path("post/", views.PostListView.as_view(), name="post-list"),
-   
     # path("post/<int:pk>/", views.PostDetailView.as_view(), name="post-detail"),
     path("post/<int:pid>/", blog_single, name="post-detail"),
     path("post/create/", views.PostCreateView.as_view(), name="post-create"),
@@ -20,5 +17,5 @@ urlpatterns = [
     ),
     path("api/v1/", include("blog.api.v1.urls")),
     path("post/api/", views.PostListApiView.as_view(), name="post-list-api"),
-    path('search/',blog_search, name='search'),
+    path("search/", blog_search, name="search"),
 ]

@@ -6,6 +6,7 @@ from django.contrib.auth import login
 
 # from accounts.models import User
 from django.shortcuts import redirect
+
 # from django.views.generic import TemplateView
 
 # Create your views here.

@@ -11,15 +11,12 @@ class CommentListSerializer(serializers.ModelSerializer):
     #         "name":obj.user.first_name,
     #     }
 
-
     class Meta:
         model = Comment
-        fields = [
-             "post","name", "email", "subject", "message","approved"]
+        fields = ["post", "name", "email", "subject", "message", "approved"]
 
 
 class CommentUpdateCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = [
-           "post","name", "email", "subject", "message","approved"]
+        fields = ["post", "name", "email", "subject", "message", "approved"]
