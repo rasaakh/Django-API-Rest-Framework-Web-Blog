@@ -1,14 +1,7 @@
 from django.urls import path
-
-# from .views import (
-#     CommentsList,
-#     CommentCreate,
-#     CommentUpdateDelete,
-#     CommentsDetail,
-#     )
-
-from . import views
 from rest_framework.routers import DefaultRouter
+from . import views
+
 app_name = "comment-api-v1"
 
 router = DefaultRouter()

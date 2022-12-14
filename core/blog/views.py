@@ -18,6 +18,14 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
 )
 
+from comment.forms import CommentForm
+from comment.models import Comment
+from django.contrib import messages
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.utils import timezone
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+
 
 class IndexView(TemplateView):
     """
@@ -79,3 +87,30 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class PostListApiView(TemplateView):
     template_name = "blog/post_list_api.html"
+
+
+def blog_single(request,pid):
+    if request.method =='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your comment was successfully registered')
+        else:
+            messages.add_message(request, messages.ERROR, 'Your comment was Not successfully ')
+            
+    posts = Post.objects.filter(status = 1,published_date__lte=timezone.now()).order_by('-published_date')
+    post= get_object_or_404( posts, pk=pid)
+
+    
+    post.counted_view += 1
+    post.save()
+    pos = Paginator(posts,1)
+    pos = pos.get_page(pid)
+
+    if  post.login_required == False or request.user.is_authenticated:
+        comments=Comment.objects.filter(post=post.id,approved=True)
+        form = CommentForm()
+        context = {'post':post,'comments':comments,'form':form}
+        return render(request,'blog/blog-single.html',context)
+    else:
+        return HttpResponseRedirect(reverse('accounts:login'))

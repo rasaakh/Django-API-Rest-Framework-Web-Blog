@@ -1,14 +1,122 @@
+{% load static %}
 <!DOCTYPE html>
+<style>
+   
+    .card {
+        background-color: #A9A9A9;
+        }
+    
+    .col-sm-12 {
+        background-color: #7FFFD4;
+        }
+
+</style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block head_title %}Blog API {% endblock head_title %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Importing Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    
 </head>
 <body>
-    <h1>index</h1>
-    <P>{{name}}</P>
-    <p>{{posts}}</p>
+    <!-- Developers Facebook Plugins Like Button and Comments JavaScript SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+
+   
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'blog:blog-api-v1:post-list'%}">BlogAPI</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'website:index'%}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'website:post-list-web' %}">Post</a>
+                </li>
+                {% block post_detail_link %}
+                {% endblock %}
+               </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+          </nav>
+          <style>
+   
+            .card {
+                background-color: #F0E683;
+                }
+            
+           </style>
+        <div class="col-sm-12 "> 
+            <h1></h1>
+            <h1>Welcome to Blog API with Django Rest Framework <h1>
+                <h1></h1>
+            <div class="col-sm-12 "> 
+                <h3>Website Blog </h3>
+                <div class="card">
+                    <h3><a href="{% url 'website:post-list-web' %}"><strong><li>Web Post List </li></strong></a></h3>
+                </div>
+                <h3>Blog API</h3>
+                <div class="card">
+                    <h3><a href="{% url 'blog:blog-api-v1:post-list'%}"><strong><li>Blog Api </li></strong></a></h3>
+                </div>
+                <h3>Accounts API</h3>
+                <div class="card">
+                    {% if request.user.is_authenticated %}
+                    <h4><a href="{% url 'accounts:profile'%}"><strong><li>Profile Api </li></strong></a></h4>
+                    {% endif %}
+                    <h4><a href="{% url 'accounts:activation-resend'%}"><strong><li>Activation Resend Api </li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:change-password'%}"><strong><li>Change Password Api</li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:token-login'%}"><strong><li>Token login Api</li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:token-logout'%}"><strong><li>Token logout Api</li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:jwt-create'%}"><strong><li>Jwt Create Api</li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:jwt-refresh'%}"><strong><li>Jwt Refresh Api</li></strong></a></h4>
+                    <h4><a href="{% url 'accounts:jwt-verify'%}"><strong><li>Jwt Verify Api</li></strong></a></h4>
+                </div>
+                <h3>Comment API</h3>
+                <div class="card">
+                    <h3><a href="{% url 'comment:comment-api-v1:comment-list'%}"><strong><li>Comment Api </li></strong></a></h3>
+                </div>
+                <h3>Swagger and Redoc</h3>
+                <div class="card">
+                    <h3><a href="{% url 'schema-swagger-ui'%}"><strong><li>Swagger </li></strong></a></h3>
+                </div>
+                <div class="card">
+                    <h3><a href="{% url 'schema-redoc'%}"><strong><li>Redoc </li></strong></a></h3>
+                </div>
+
+            </div>
+        </div>    
+    </div>
+
+
+
 </body>
+
 </html>
+
