@@ -1,0 +1,10 @@
+WARNING 2022-12-15 11:24:45,520 django.server.log_message:161- "GET /static/css1/base.css HTTP/1.1" 404 1899
+WARNING 2022-12-15 11:24:48,107 django.server.log_message:161- "GET /static/css/style.css HTTP/1.1" 404 1899
+WARNING 2022-12-15 11:24:48,110 django.server.log_message:161- "GET /static/js/jquery.min.js HTTP/1.1" 404 1908
+WARNING 2022-12-15 11:24:48,112 django.server.log_message:161- "GET /static/js/popper.js HTTP/1.1" 404 1896
+WARNING 2022-12-15 11:24:48,114 django.server.log_message:161- "GET /static/js/main.js HTTP/1.1" 404 1890
+WARNING 2022-12-15 11:24:48,115 django.server.log_message:161- "GET /static/js/bootstrap.min.js HTTP/1.1" 404 1917
+WARNING 2022-12-15 11:24:48,155 django.server.log_message:161- "GET /static/images/bg.jpg HTTP/1.1" 404 1899
+WARNING 2022-12-15 11:24:48,168 django.server.log_message:161- "GET /static/js/popper.js HTTP/1.1" 404 1896
+WARNING 2022-12-15 11:24:48,183 django.server.log_message:161- "GET /static/js/bootstrap.min.js HTTP/1.1" 404 1917
+WARNING 2022-12-15 11:24:48,200 django.server.log_message:161- "GET /static/js/main.js HTTP/1.1" 404 1890
