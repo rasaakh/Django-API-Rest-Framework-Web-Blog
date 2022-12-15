@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework.authtoken",
     "taggit",
     "accounts",
     "blog",
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "website",
+    "django_celery_beat",
+    "corsheaders",
 ]
 
 SITE_ID = config("SITE_ID", cast=int, default=1)
@@ -145,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TTIME_ZONE = config("TIME_ZONE", default="UTC")
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -158,9 +161,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-
 MEDIA_URL = "/media/"
+
+STATIC_ROOT = BASE_DIR / "static"
 MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
@@ -227,19 +230,18 @@ if config("USE_SSL_CONFIG", cast=bool, default=False):
     # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
-    ],
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
+        # 'rest_framework.authentication.BasicAuthentication',
         "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 if config("DISABLE_BROWSEABLE_API", cast=bool, default=False):
     REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = (
-        "rest_framework.renderers.JSONRenderer",)
+        "rest_framework.renderers.JSONRenderer",
+    )
 
 
 # cors headers config
@@ -309,6 +311,9 @@ if SHOW_DEBUGGER_TOOLBAR:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
     import socket  # only if you haven't already imported this
+
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
-    
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
