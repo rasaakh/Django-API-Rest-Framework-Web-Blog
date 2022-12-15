@@ -118,4 +118,4 @@ def blog_search(request):
         if s := request.GET.get("s"):
             posts = posts.filter(content__contains=s)
     context = {"posts": posts}
-    return render(request, "blog/post_list_search.html", context)
+    return render(request, "post_list_search.html", context)
