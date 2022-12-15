@@ -4,12 +4,18 @@ django-taggit
 Pillow
 
 djangorestframework
+
+# third party modules
 markdown       
 django-filter  
-
+drf-yasg[validation]
+djangorestframework-simplejwt
+django-cors-headers
+django-robots
+django-debug-toolbar
+ 
 coreapi 
 
-djangorestframework-simplejwt
 django-mail-templated
 djoser
 black
@@ -19,11 +25,16 @@ dj-rest-auth
 pytest
 pytest-django
 Faker
+
+# deployment
+gunicorn
+
+
 # background proccess and cache
 celery
 redis
 django-redis
 django-celery-beat
-# deployment
-gunicorn
-drf-yasg[validation]
+
+# database client
+psycopg2-binary
