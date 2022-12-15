@@ -106,7 +106,7 @@ def blog_single(request, pid):
         comments = Comment.objects.filter(post=post.id, approved=True)
         form = CommentForm()
         context = {"post": post, "comments": comments, "form": form}
-        return render(request, "blog/blog-single.html", context)
+        return render(request, "blog-single.html", context)
     else:
         return HttpResponseRedirect(reverse("accounts:login"))
 
