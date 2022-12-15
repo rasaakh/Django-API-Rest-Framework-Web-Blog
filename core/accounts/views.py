@@ -20,7 +20,7 @@ User = get_user_model()
 
 
 class CustomLoginView(LoginView):
-    template_name = "login.html"
+    template_name = "accounts/login.html"
     fields = "username", "password"
     redirect_authenticated_user = True
 
@@ -32,7 +32,7 @@ class CustomLoginView(LoginView):
 
 
 class RegisterPage(FormView):
-    template_name = "register.html"
+    template_name = "accounts/register.html"
 
     form_class = SignUpForm
     redirect_authenticated_user = True
