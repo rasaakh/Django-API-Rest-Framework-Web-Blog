@@ -26,4 +26,4 @@ Navigate to the list view at [http://127.0.0.1:8000/blog/api/v1/post]
 
 ![Blog detail view](screenshots/11.jpg)
 
-![Blog detail view](screenshots/blog-crud.png)
+
