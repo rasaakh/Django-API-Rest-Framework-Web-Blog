@@ -22,7 +22,7 @@ Navigate to the list view at [http://127.0.0.1:8000/blog/api/v1/post]
 
 ![Blog detail view](screenshots/7.jpg)
 
-![Blog detail view](screenshots/10.jpg)
+
 
 ![Blog detail view](screenshots/api1.jpg)
 
