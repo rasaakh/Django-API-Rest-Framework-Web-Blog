@@ -36,8 +36,6 @@ schema_view = get_schema_view(
     permission_classes=[permissions.AllowAny],
 )
 
-
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path('', admin.site.urls),
@@ -45,7 +43,6 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path("comment/", include("comment.urls")),
     path("", include("website.urls")),
-    
 ]
 
 
@@ -84,8 +81,6 @@ if settings.SHOW_SWAGGER:
             name="schema-redoc",
         ),
     ]
-
-
 
 handler400 = "core.error_views.error_400"  # bad_request
 handler403 = "core.error_views.error_403"  # permission_denied

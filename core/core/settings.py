@@ -38,7 +38,6 @@ ALLOWED_HOSTS = config(
 COMINGSOON = config("COMINGSOON", cast=bool, default=False)
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -122,8 +121,6 @@ else:
     }
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -188,7 +185,7 @@ MESSAGE_TAGS = {
 }
 
 # Email Configurations for production and development
-if DEBUG:    
+if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_USE_TLS = False
     EMAIL_HOST = "smtp4dev"
@@ -205,8 +202,7 @@ else:
     EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="password")
     EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool, default=True)
     EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=False)
-    DEFAULT_FROM_EMAIL = config(
-        "DEFAULT_FROM_EMAIL", default="infor@example.com")
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="infor@example.com")
 
 
 # security configs for production
