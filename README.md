@@ -8,11 +8,11 @@ A simple Blog Rest API based on Django-Rest-Framework
 
 ```
 $ git clone  https://github.com/rasaakh/Django-API-Rest-Framework-Web-Blog.git
-$ docker-compose up --build
+$ docker compose -f docker-compose-stage.yml up --build -d
 
 ```
 
-Navigate to the list view at [http://127.0.0.1:8000/blog/api/v1/post]
+Navigate to the list view at [185.137.14.28/blog/api/v1/post]
 
 ![Blog list view](screenshots/1.jpg)
 
